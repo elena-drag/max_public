@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // Function to get query parameters
+            function getQueryParam(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+
+            // Extract urlToShare from query parameters
+            const urlToShare = getQueryParam("urlToShare");
+console.log(urlToShare)
+            if (navigator.share && urlToShare) {
+                window.doSharing = () => {
+                    navigator.share({
+                        title: "Website " + urlToShare,
+                        text: "Website " + urlToShare,
+                        url: urlToShare,
+                    });
+                };
+
+                // Auto-create share button
+                document.body.insertAdjacentHTML(
+                    "beforeend",
+                    `<button onclick="doSharing()">Share</button>`
+                );
+            }
+        </script>
+    </body>
+</html>
+
